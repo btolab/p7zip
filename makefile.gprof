@@ -1,8 +1,7 @@
 
-ALLFLAGS=-Wall -O2 -s -fPIC \
+ALLFLAGS=-Wall -O -g -pg \
     	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
-	-DBIG_ENDIAN \
 	$(LOCAL_FLAGS)
 
 CXX=g++ $(ALLFLAGS)
@@ -11,4 +10,6 @@ LINK_SHARED=-shared
 
 LOCAL_LIBS=-lpthread
 LOCAL_LIBS_DLL=$(LOCAL_LIBS) -ldl
+# static linkage
+# LOCAL_LIBS=-static -lpthread
 

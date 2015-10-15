@@ -6,8 +6,19 @@
 #ifdef _WIN32
 
 #include <windows.h>
+#define CHAR_PATH_SEPARATOR '\\'
+#define WCHAR_PATH_SEPARATOR L'\\'
+
+#define STRING_PATH_SEPARATOR "\\"
+#define WSTRING_PATH_SEPARATOR L"\\"
 
 #else
+
+#define CHAR_PATH_SEPARATOR '/'
+#define WCHAR_PATH_SEPARATOR L'/'
+
+#define STRING_PATH_SEPARATOR "/"
+#define WSTRING_PATH_SEPARATOR L"/"
 
 #include <stddef.h> // for wchar_t
 #include <string.h>
@@ -61,6 +72,7 @@ typedef LONG SCODE;
 
 #define S_OK    ((HRESULT)0x00000000L)
 #define S_FALSE ((HRESULT)0x00000001L)
+#define E_NOTIMPL ((HRESULT)0x80004001L)
 #define E_NOINTERFACE ((HRESULT)0x80004002L)
 #define E_ABORT ((HRESULT)0x80004004L)
 #define E_FAIL ((HRESULT)0x80004005L)
@@ -165,7 +177,7 @@ MY_EXTERN_C void SysFreeString(BSTR bstr);
 MY_EXTERN_C UINT SysStringByteLen(BSTR bstr);
 MY_EXTERN_C UINT SysStringLen(BSTR bstr);
 
-MY_EXTERN_C DWORD GetLastError();
+/* MY_EXTERN_C DWORD GetLastError(); */
 MY_EXTERN_C HRESULT VariantClear(VARIANTARG *prop);
 MY_EXTERN_C HRESULT VariantCopy(VARIANTARG *dest, VARIANTARG *src);
 MY_EXTERN_C LONG CompareFileTime(const FILETIME* ft1, const FILETIME* ft2);
