@@ -100,7 +100,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     if(!FileTimeToUnixTime(utcTime, newItem.Time))
       return E_INVALIDARG;
     newItem.Name = UnicodeStringToMultiByte(name, CP_ACP);
-    int dirDelimiterPos = newItem.Name.ReverseFind('\\');
+    int dirDelimiterPos = newItem.Name.ReverseFind(CHAR_PATH_SEPARATOR);
     if (dirDelimiterPos >= 0)
       newItem.Name = newItem.Name.Mid(dirDelimiterPos + 1);
     
@@ -129,7 +129,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     COutArchive outArchive;
     outArchive.Create(outStream);
     outArchive.WriteHeader(newItem);
-    RINOK(m_Stream->Seek(m_Item.DataPosition, STREAM_SEEK_SET, NULL));
+    RINOK(m_Stream->Seek(m_StreamStartPosition + m_DataOffset, STREAM_SEEK_SET, NULL));
   }
   else
   {

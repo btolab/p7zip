@@ -1,8 +1,8 @@
 PROG=common
 
-LOCAL_FLAGS=-DENV_UNIX -I../../myWindows -I../../ -I../../include_windows
+LOCAL_FLAGS=-DENV_UNIX -I../myWindows -I../ -I../include_windows
 
-include ../../makefile.machine
+include ../makefile.machine
 
 LOCAL_SHARED=
 
@@ -25,5 +25,5 @@ String.o \
 UTFConvert.o \
 Wildcard.o
 
-include ../../makefile.glb
+include ../makefile.glb
 
