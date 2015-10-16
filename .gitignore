@@ -1,0 +1,4 @@
+*.o
+bin/
+check/my_86_filter/my_86_filter
+*.pyc
