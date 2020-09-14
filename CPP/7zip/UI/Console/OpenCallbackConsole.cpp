@@ -84,7 +84,7 @@ HRESULT COpenCallbackConsole::Open_CryptoGetTextPassword(BSTR *password)
   {
     ClosePercents();
     Password = GetPassword(_so);
-    PasswordIsDefined = true;
+  //  PasswordIsDefined = true;
   }
   return StringToBstr(Password, password);
 }
