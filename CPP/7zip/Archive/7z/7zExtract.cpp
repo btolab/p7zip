@@ -10,7 +10,13 @@
 
 #include "7zDecode.h"
 #include "7zHandler.h"
+#include<iostream>
+#include "../../../Common/StdOutStream.h"
+#include "../../../Common/StringConvert.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 // EXTERN_g_ExternalCodecs
 
 namespace NArchive {
@@ -149,6 +155,7 @@ STDMETHODIMP CFolderOutStream::Write(const void *data, UInt32 size, UInt32 *proc
   
   while (size != 0)
   {
+    const CFileItem &fi = _db->Files[_fileIndex];
     if (_fileIsOpen)
     {
       UInt32 cur = (size < _rem ? size : (UInt32)_rem);
@@ -166,6 +173,19 @@ STDMETHODIMP CFolderOutStream::Write(const void *data, UInt32 size, UInt32 *proc
       {
         RINOK(CloseFile());
         RINOK(ProcessEmptyFiles());
+        FString str;
+        ExtractCallback->GetDiskFilePath(str);
+        AString newStr;
+        UnicodeStringToMultiByte2(newStr,fs2us(str),0);
+
+        mode_t fileAttrib = (fi.Attrib >> 16) & 511;
+        if(fileAttrib != 0)
+        {
+             if (chmod((const char*)newStr, fileAttrib) < 0)
+             {
+                  std::cout << "Cannot modify the Permission of the file" << std::endl;
+             }
+        }
       }
       RINOK(result);
       if (cur == 0)

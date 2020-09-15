@@ -175,13 +175,17 @@ SetOperationResult()
   STDMETHOD(GetStream)(UInt32 index, ISequentialOutStream **outStream, Int32 askExtractMode) x; \
   STDMETHOD(PrepareOperation)(Int32 askExtractMode) x; \
   STDMETHOD(SetOperationResult)(Int32 opRes) x; \
+  STDMETHOD(GetDiskFilePath)(FString & str) x;\
 
 ARCHIVE_INTERFACE_SUB(IArchiveExtractCallback, IProgress, 0x20)
 {
   INTERFACE_IArchiveExtractCallback(PURE)
 };
 
-
+ARCHIVE_INTERFACE(IInArchiveGetFilePath, 0x51)
+{
+  STDMETHOD(GetDiskFilePath)(FString & str) PURE;
+};
 
 /*
 IArchiveExtractCallbackMessage can be requested from IArchiveExtractCallback object
