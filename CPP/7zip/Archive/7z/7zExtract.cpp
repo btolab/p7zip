@@ -385,6 +385,14 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           #endif
           );
 
+      if(result == S_FALSE)
+      {
+        curUnpacked = 0;
+        curPacked = 0;
+        i -= numSolidFiles;
+        continue;
+      }
+
       if (result == S_FALSE || result == E_NOTIMPL)
       {
         bool wasFinished = folderOutStream->WasWritingFinished();
