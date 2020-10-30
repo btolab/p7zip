@@ -41,7 +41,7 @@ static bool IsSimpleAsciiString(const wchar_t *s)
     wchar_t c = *s++;
     if (c == 0)
       return true;
-    if (c < 0x20 || c > 0x7F)
+    if ((c < 0x20 || c > 0x7F) && (c < 0x4E00 || c > 0x9FA5))
       return false;
   }
 }
