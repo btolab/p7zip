@@ -1425,6 +1425,7 @@ STDMETHODIMP CArchiveExtractCallback::PrepareOperation(Int32 askExtractMode)
   COM_TRY_END
 }
 
+STDMETHODIMP CArchiveExtractCallback::GetDiskFilePath(FString &str) {str =_diskFilePath; return  0;}
 
 STDMETHODIMP CArchiveExtractCallback::SetOperationResult(Int32 opRes)
 {

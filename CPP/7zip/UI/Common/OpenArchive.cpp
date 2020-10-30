@@ -1481,7 +1481,7 @@ public:
     Offset = 0;
   }
 };
-
+STDMETHODIMP CExtractCallback_To_OpenCallback::GetDiskFilePath(FString &str) { return  0;}
 STDMETHODIMP CExtractCallback_To_OpenCallback::SetTotal(UInt64 /* size */)
 {
   return S_OK;
